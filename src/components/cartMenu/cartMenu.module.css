@@ -22,7 +22,10 @@
 .price {
     color: #BEEB14;
 }
-
+.textNoProduct {
+   text-align: center;
+   padding-top: 20px;
+}
 @media (max-width: 500px) {
     .menu {
         width: 300px;

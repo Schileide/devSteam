@@ -1,4 +1,5 @@
 import styles from '@/styles/index.module.css'
+import { useState } from 'react'
 
 import Head from 'next/head'
 import Navbar from '@/components/navbar/navbar'
@@ -8,6 +9,16 @@ import SaleCard from '@/components/cards/SaleCard/saleCard'
 import GameCard from '@/components/cards/gameCard/gameCard'
 
 export default function Home() {
+
+  const [cart,setCart] = useState([])
+
+  const handleAddProduct = (info) => {
+    setCart([...cart, info])
+  } 
+  const handleRemoveProduct = (pos) => {
+    setCart(cart.filter((obj, posObj) => posObj !== pos))
+ }
+
   return (
     <>
       <Head>
@@ -17,7 +28,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
-        <Navbar />
+        <Navbar cart={cart} onRemove={handleRemoveProduct} />
         <Container>
           <div className={styles.session}>
             <Subtitle>Promoções</Subtitle>
@@ -27,28 +38,31 @@ export default function Home() {
               discount={'30%'}
               fullPrice={'180,99'}
               descontPrice = {'130,90'}
+              onAdd={() => handleAddProduct({name:'League of Legends', price: 130.9, image: 'league-of-legends.jpg'})}
               />
               <SaleCard 
               image={'dota-2.jpg'}
               discount={'40%'}
               fullPrice={'110,99'}
               descontPrice={'65,00'}
+              onAdd={() => handleAddProduct({name:'Dota 2', price: 65, image: 'dota-2.jpg'})}
               />
               <SaleCard 
               image={'valorant.jpg'}
               discount={'50%'}
               fullPrice={'130,99'}
               descontPrice = {'80,90'}
+              onAdd={() => handleAddProduct({name:'Valorant', price: 80.9, image: 'valorant.jpg'})}
               />
             </div>
           </div>
           <div className={styles.session}>
             <Subtitle>Outros Jogos</Subtitle>
             <div className={styles.gamecontainer}>
-              <GameCard />
-              <GameCard />
-              <GameCard />
-              <GameCard />
+              <GameCard onAdd={() =>
+                  handleAddProduct({name:'Counter Strike', price: 99.9, image: 'counter-strike.jpg'})
+                } 
+              />
             </div>
           </div>
         </Container>
