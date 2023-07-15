@@ -34,7 +34,7 @@ export default function Home() {
             <Subtitle>Promoções</Subtitle>
             <div className={styles.salecontainer}>
               <SaleCard 
-              image={'league-of-Legends.jpg'}
+              image={'league-of-legends.jpg'}
               discount={'30%'}
               fullPrice={'180,99'}
               descontPrice = {'130,90'}
